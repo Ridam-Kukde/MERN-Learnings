@@ -44,7 +44,7 @@ const UpdateUser= () =>{
 
     const handleSubmit= async(e)=>{
         e.preventDefault();
-        axios.post(`http://localhost:5000/api/users/${id}`,formData)
+        axios.put(`http://localhost:5000/api/users/${id}`,formData)
         .then(response=> {
             console.log(response)
             navigate("/");
