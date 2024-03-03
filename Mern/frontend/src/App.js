@@ -12,9 +12,12 @@ function App() {
     <Header>       </Header>   
     <Routes>   
       <Route path="/" element={<Dashboard></Dashboard>}></Route>
-      <Route path="/users" element={<PostUser></PostUser>}></Route>
-      <Route path="*" element={<NoMatch></NoMatch>}></Route>
+
       <Route path="/users/:id" element={<UpdateUser></UpdateUser>}></Route>
+
+      <Route path="/users" element={<PostUser></PostUser>}></Route>
+
+      <Route path="*" element={<NoMatch></NoMatch>}></Route>
 
     </Routes>
     </>

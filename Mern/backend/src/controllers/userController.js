@@ -1,60 +1,60 @@
 
-const Item = require('../models/user');
+const User = require('../models/user');
 
-// Create a new item
-exports.createItem = async (req, res) => {
+// Create a new user
+exports.createUser = async (req, res) => {
   try {
-    const newItem = await Item.create(req.body);
-    res.status(201).json(newItem);
+    const newUser = await User.create(req.body);
+    res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-// Get all items
-exports.getAllItems = async (req, res) => {
+// Get all Users
+exports.getAllUsers = async (req, res) => {
   try {
-    const items = await Item.find();
-    res.json(items);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// Get a single item by ID
-exports.getItemById = async (req, res) => {
+// Get a single User by ID
+exports.getUserById = async (req, res) => {
   try {
-    const item = await Item.findById(req.params.id);
-    if (!item) {
-      return res.status(404).json({ message: 'Item not found' });
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json(item);
+    res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// Update an item by ID
-exports.updateItem = async (req, res) => {
+// Update an user by ID
+exports.updateUser = async (req, res) => {
   try {
-    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedItem) {
-      return res.status(404).json({ message: 'Item not found' });
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json(updatedItem);
+    res.json(updatedUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-// Delete an item by ID
-exports.deleteItem = async (req, res) => {
+// Delete an user by ID
+exports.deleteUser = async (req, res) => {
   try {
-    const deletedItem = await Item.findByIdAndDelete(req.params.id);
-    if (!deletedItem) {
-      return res.status(404).json({ message: 'Item not found' });
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ message: 'Item deleted successfully' });
+    res.json({ message: 'User deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
