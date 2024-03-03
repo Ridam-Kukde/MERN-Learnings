@@ -1,15 +1,61 @@
-const UserService= require("../services/userservice")
 
-class UserController{
+const Item = require('../models/user');
 
-    async createUser( name, email, phone ){
-        try {
-            const {name, email, phone}= req.body;
-            const saveUser= await userService.createUser(name, email, phone);
-            resizeBy.json(saveUser);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+// Create a new item
+exports.createItem = async (req, res) => {
+  try {
+    const newItem = await Item.create(req.body);
+    res.status(201).json(newItem);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Get all items
+exports.getAllItems = async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Get a single item by ID
+exports.getItemById = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
     }
-}
-module. exports= new UserController;
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Update an item by ID
+exports.updateItem = async (req, res) => {
+  try {
+    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedItem) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    res.json(updatedItem);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Delete an item by ID
+exports.deleteItem = async (req, res) => {
+  try {
+    const deletedItem = await Item.findByIdAndDelete(req.params.id);
+    if (!deletedItem) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    res.json({ message: 'Item deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

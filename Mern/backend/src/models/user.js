@@ -1,9 +1,18 @@
-const Mongoose= require("../configuration/dbConfig");
 
-const userSchema= new Mongoose.Schema({
-    name: String,
-    email: String,
-    phone: Number
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email:{
+    type: String,
+    required: true
+  },
+  phone:{
+    type: Number
+  }
 });
-const user= Mongoose.model("User", userSchema);
-module.exports=user;
+
+module.exports = mongoose.model('users', userSchema);
